@@ -72,6 +72,74 @@
 				"url": "https://restful-booker.herokuapp.com/booking"
 			},
 			"response": []
+		},
+		{
+			"name": "Req2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "120c2814-3d1e-485d-b248-45346a4b25a5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Booking ID should not be null\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookingid).to.not.be.null;\r",
+							"});\r",
+							"pm.test(\"Firstname and Lastname should match request JSON\", function () {\r",
+							"    // Parse request body\r",
+							"    let requestData = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"    // Parse response body\r",
+							"    let responseData = pm.response.json();\r",
+							"\r",
+							"    // Validate firstname\r",
+							"    pm.expect(responseData.booking.firstname)\r",
+							"        .to.eql(requestData.firstname);\r",
+							"\r",
+							"    // Validate lastname\r",
+							"    pm.expect(responseData.booking.lastname)\r",
+							"        .to.eql(requestData.lastname);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"id": "a667096c-1d0b-43d2-9772-9e712af4c6f4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\" : \"Jim\",\r\n    \"lastname\" : \"Brown\",\r\n    \"totalprice\" : 111,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2018-01-01\",\r\n        \"checkout\" : \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://restful-booker.herokuapp.com/booking"
+			},
+			"response": []
 		}
 	]
 }
