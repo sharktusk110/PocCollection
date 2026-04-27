@@ -14,7 +14,7 @@
 						"id": "120c2814-3d1e-485d-b248-45346a4b25a5",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(300);\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"pm.test(\"Booking ID should not be null\", function () {\r",
 							"    let jsonData = pm.response.json();\r",
